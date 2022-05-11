@@ -3,26 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.gyamfimartins.dinnerbell.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/homeFragment"
+        android:name="com.gyamfimartins.dinnerbell.ui.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_homeFragment_to_mealListFragment"
+            app:destination="@id/mealListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.gyamfimartins.dinnerbell.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/mealDetailsFragment"
+        android:name="com.gyamfimartins.dinnerbell.ui.MealDetailsFragment"
+        android:label="Random Meal"
+        tools:layout="@layout/fragment_meal_details" />
+    <fragment
+        android:id="@+id/mealListFragment"
+        android:name="com.gyamfimartins.dinnerbell.ui.MealListFragment"
+        android:label="fragment_meal_list"
+        tools:layout="@layout/fragment_meal_list" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_mealListFragment_to_mealDetailsFragment"
+            app:destination="@id/mealDetailsFragment" />
     </fragment>
+    <action android:id="@+id/action_global_mealDetailsFragment" app:destination="@id/mealDetailsFragment" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.gyamfimartins.dinnerbell.ui.CategoryFragment"
+        android:label="Category"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_categoryFragment_to_mealListFragment"
+            app:destination="@id/mealListFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_categoryFragment" app:destination="@id/categoryFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.gyamfimartins.dinnerbell.ui.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment" />
+    <fragment
+        android:id="@+id/savedMealFragment"
+        android:name="com.gyamfimartins.dinnerbell.ui.SavedMealFragment"
+        android:label="Saved Meal"
+        tools:layout="@layout/fragment_saved_meal" />
+    <action android:id="@+id/action_global_savedMealFragment" app:destination="@id/savedMealFragment" />
 </navigation>
