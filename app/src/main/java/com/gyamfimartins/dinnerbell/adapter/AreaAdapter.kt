@@ -9,7 +9,7 @@ import com.gyamfimartins.dinnerbell.R
 import com.gyamfimartins.dinnerbell.data.Area
 import kotlinx.android.synthetic.main.singlerow_area.view.*
 
-class AreaAdapter(var areaList: ArrayList<Area>): RecyclerView.Adapter<AreaAdapter.AreaViewHolder>() {
+class AreaAdapter(var areaList: ArrayList<Area>,val clickListener: (imageTitle: String) -> Unit): RecyclerView.Adapter<AreaAdapter.AreaViewHolder>() {
 
     fun updateAreaList(newareaList: List<Area>) {
         areaList.clear()
@@ -25,6 +25,9 @@ class AreaAdapter(var areaList: ArrayList<Area>): RecyclerView.Adapter<AreaAdapt
 
     override fun onBindViewHolder(holder: AreaViewHolder, position: Int) {
         holder.bind(areaList[position])
+        holder.itemView.tvarea.setOnClickListener {
+            clickListener(areaList[position].strArea)
+        }
     }
 
     class AreaViewHolder(view: View): RecyclerView.ViewHolder(view) {

@@ -5,23 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gyamfimartins.dinnerbell.adapter.CategoryAdapter
 import com.gyamfimartins.dinnerbell.databinding.FragmentCategoryBinding
-import com.gyamfimartins.dinnerbell.viewmodel.AreaViewModel
 import com.gyamfimartins.dinnerbell.viewmodel.CategoryViewModel
 
 class CategoryFragment : Fragment() {
     private lateinit var binding: FragmentCategoryBinding
     private lateinit var viewModel: CategoryViewModel
-    private val categoryAdapter = CategoryAdapter(arrayListOf())
+    private val categoryAdapter = CategoryAdapter(arrayListOf()){
+        navigateToMealsList(it)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
         viewModel.refresh()
@@ -56,6 +59,12 @@ class CategoryFragment : Fragment() {
                 }
             }
         })
+    }
+
+
+    fun navigateToMealsList(category: String){
+        val action = CategoryFragmentDirections.actionCategoryFragmentToMealListFragment(category,"category")
+        findNavController().navigate(action)
     }
 
 }

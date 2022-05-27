@@ -18,15 +18,27 @@
         android:id="@+id/mealDetailsFragment"
         android:name="com.gyamfimartins.dinnerbell.ui.MealDetailsFragment"
         android:label="Random Meal"
-        tools:layout="@layout/fragment_meal_details" />
+        tools:layout="@layout/fragment_meal_details" >
+        <argument
+            android:name="mealid"
+            app:argType="string" />
+        <argument android:name="screen"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/mealListFragment"
         android:name="com.gyamfimartins.dinnerbell.ui.MealListFragment"
-        android:label="fragment_meal_list"
-        tools:layout="@layout/fragment_meal_list" >
+        android:label="{area}"
+        tools:layout="@layout/fragment_meal_list">
         <action
             android:id="@+id/action_mealListFragment_to_mealDetailsFragment"
             app:destination="@id/mealDetailsFragment" />
+        <argument
+            android:name="area"
+            app:argType="string" />
+        <argument
+            android:name="screen"
+            app:argType="string" />
     </fragment>
     <action android:id="@+id/action_global_mealDetailsFragment" app:destination="@id/mealDetailsFragment" />
     <fragment

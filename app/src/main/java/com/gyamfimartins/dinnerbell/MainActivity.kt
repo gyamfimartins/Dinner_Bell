@@ -1,6 +1,7 @@
 package com.gyamfimartins.dinnerbell
 
 import android.os.Bundle
+import android.text.Layout
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
+            val action =
+
             findNavController(
                 this@MainActivity,
                 R.id.nav_host_fragment_content_main

@@ -1,8 +1,6 @@
 package com.retrofitcoroutines.example.remote
 
-import com.gyamfimartins.dinnerbell.data.AreaList
-import com.gyamfimartins.dinnerbell.data.CategoryList
-import com.gyamfimartins.dinnerbell.data.MealList
+import com.gyamfimartins.dinnerbell.data.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -16,5 +14,17 @@ interface MealApi {
     suspend fun getCategoryList(): Response<CategoryList>
 
     @GET("filter.php")
-    fun getMealByArea(@Query("a") area: String): Response<MealList>
+    suspend fun getMealByArea(@Query("a") area: String): MealList
+
+    @GET("filter.php")
+    suspend fun getMealByCategory(@Query("c") area: String): MealList
+
+    @GET("lookup.php")
+    suspend fun getMealDetail(@Query("i") mealid: String): MealDetailList
+
+    @GET("random.php")
+    suspend fun getRandomMeal(): MealDetailList
+
+    @GET("list.php?i=list")
+    suspend fun getIngredients(): IngredientList
 }

@@ -8,7 +8,7 @@ import com.gyamfimartins.dinnerbell.R
 import com.gyamfimartins.dinnerbell.data.Category
 import kotlinx.android.synthetic.main.singlerow_category.view.*
 
-class CategoryAdapter(var categoryList: ArrayList<Category>): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(var categoryList: ArrayList<Category>,val clickListener: (imageTitle: String) -> Unit): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     fun updateCategoryList(newCategoryList: List<Category>) {
         categoryList.clear()
@@ -24,6 +24,9 @@ class CategoryAdapter(var categoryList: ArrayList<Category>): RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.bind(categoryList[position])
+        holder.itemView.tvcategory.setOnClickListener {
+            clickListener(categoryList[position].strCategory)
+        }
     }
 
     class CategoryViewHolder(view: View): RecyclerView.ViewHolder(view) {

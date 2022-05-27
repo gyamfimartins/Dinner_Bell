@@ -1,60 +1,59 @@
 package com.gyamfimartins.dinnerbell.ui
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.gyamfimartins.dinnerbell.R
+import com.gyamfimartins.dinnerbell.databinding.FragmentMealDetailsBinding
+import com.gyamfimartins.dinnerbell.viewmodel.MealDetailViewModel
+import com.gyamfimartins.dinnerbell.viewmodel.MealViewModel
+import com.retrofitcoroutines.example.utils.loadImage
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MealDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MealDetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var binding: FragmentMealDetailsBinding
+    private lateinit var viewModel: MealDetailViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meal_details, container, false)
+    ): View {
+        binding = FragmentMealDetailsBinding.inflate(inflater, container, false)
+        val mealid = (arguments?.getString("mealid"))?: ""
+        val screen = (arguments?.getString("screen"))?: "Random"
+
+        viewModel = ViewModelProvider(this).get(MealDetailViewModel::class.java)
+        viewModel.refresh(mealid,screen)
+        observeViewModel()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MealDetailsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MealDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    fun observeViewModel(){
+        viewModel.mealDetailList.observe(requireActivity(), Observer { mealList ->
+            mealList?.let {
+                binding.ivMealImage.loadImage(mealList.get(0).strMealThumb)
+                binding.tvinstruction.text = mealList.get(0).strInstructions
+                binding.tvvideoLink.text = mealList.get(0).strYoutube?: ""
+                binding.tvmealname.text = mealList.get(0).strMeal
             }
+
+        })
+        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+            Log.i(ContentValues.TAG, "isLoading $isLoading")
+        })
+        viewModel.errorMessage.observe(requireActivity(), Observer { errorMessage ->
+            if (errorMessage != null) {
+                Toast.makeText(requireActivity(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        })
+
     }
+
+
 }
