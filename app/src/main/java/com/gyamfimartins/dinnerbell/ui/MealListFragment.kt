@@ -13,8 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gyamfimartins.dinnerbell.adapter.MealAdapter
-import com.gyamfimartins.dinnerbell.data.Meal
-import com.gyamfimartins.dinnerbell.data.MealList
 import com.gyamfimartins.dinnerbell.databinding.FragmentMealListBinding
 import com.gyamfimartins.dinnerbell.viewmodel.MealViewModel
 

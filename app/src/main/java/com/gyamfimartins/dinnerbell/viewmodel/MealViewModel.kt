@@ -7,11 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gyamfimartins.dinnerbell.data.Meal
-import com.gyamfimartins.dinnerbell.data.MealList
 import com.retrofitcoroutines.example.remote.MealService
 import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
 
 class MealViewModel: ViewModel() {
 

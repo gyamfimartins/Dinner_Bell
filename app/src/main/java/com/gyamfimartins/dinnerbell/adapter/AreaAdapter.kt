@@ -3,7 +3,6 @@ package com.gyamfimartins.dinnerbell.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.gyamfimartins.dinnerbell.R
 import com.gyamfimartins.dinnerbell.data.Area

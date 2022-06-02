@@ -10,16 +10,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.gyamfimartins.dinnerbell.R
+import com.gyamfimartins.dinnerbell.data.SavedMeal
 import com.gyamfimartins.dinnerbell.databinding.FragmentMealDetailsBinding
 import com.gyamfimartins.dinnerbell.viewmodel.MealDetailViewModel
-import com.gyamfimartins.dinnerbell.viewmodel.MealViewModel
+import com.gyamfimartins.dinnerbell.viewmodel.SavedMealViewModel
 import com.retrofitcoroutines.example.utils.loadImage
 
 
 class MealDetailsFragment : Fragment() {
     private lateinit var binding: FragmentMealDetailsBinding
     private lateinit var viewModel: MealDetailViewModel
+    private var mealUrl: String = ""
+    private lateinit var savedMealViewModel: SavedMealViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +34,16 @@ class MealDetailsFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MealDetailViewModel::class.java)
         viewModel.refresh(mealid,screen)
         observeViewModel()
+        savedMealViewModel = ViewModelProvider(this).get(SavedMealViewModel::class.java)
+
+
+        binding.btnsave.setOnClickListener {
+            val newData = SavedMeal(0,mealid,binding.tvmealname.text.toString(),
+                mealUrl)
+            savedMealViewModel.addMeal(newData)
+            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+        }
+
         return binding.root
     }
 
@@ -41,6 +54,7 @@ class MealDetailsFragment : Fragment() {
                 binding.tvinstruction.text = mealList.get(0).strInstructions
                 binding.tvvideoLink.text = mealList.get(0).strYoutube?: ""
                 binding.tvmealname.text = mealList.get(0).strMeal
+                mealUrl = mealList.get(0).strMealThumb
             }
 
         })
