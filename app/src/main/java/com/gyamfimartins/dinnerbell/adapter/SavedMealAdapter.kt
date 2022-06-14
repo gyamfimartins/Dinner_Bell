@@ -9,7 +9,7 @@ import com.gyamfimartins.dinnerbell.data.SavedMeal
 import com.retrofitcoroutines.example.utils.loadImage
 import kotlinx.android.synthetic.main.singlerow_meallist.view.*
 
-class SavedMealAdapter(var mealList: ArrayList<SavedMeal>, val clickListener: (imageTitle: String) -> Unit): RecyclerView.Adapter<SavedMealAdapter.MealViewHolder>() {
+class SavedMealAdapter(var mealList: ArrayList<SavedMeal>, val clickListener: (mealId: String) -> Unit, val deleteMeal: (meal: SavedMeal) -> Unit): RecyclerView.Adapter<SavedMealAdapter.MealViewHolder>() {
 
     fun updateMealList(newMealList: List<SavedMeal>) {
         mealList.clear()
@@ -28,16 +28,21 @@ class SavedMealAdapter(var mealList: ArrayList<SavedMeal>, val clickListener: (i
         holder.itemView.card_view.setOnClickListener {
             clickListener(mealList[position].idMeal)
         }
+        holder.itemView.btndelete.setOnClickListener {
+            deleteMeal(mealList[position])
+        }
     }
 
     class MealViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
         private val tvstrMeal = view.tvstrMeal
         private val ivstrMealThumbid = view.ivstrMealThumbid
+        private val btnDelete = view.btndelete
 
         fun bind(savedMeal: SavedMeal) {
             tvstrMeal.text = savedMeal.strMeal
             ivstrMealThumbid.loadImage(savedMeal.strMealThumb)
+            btnDelete.visibility = View.VISIBLE
         }
     }
 }

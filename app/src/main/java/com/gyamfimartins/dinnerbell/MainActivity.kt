@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            val action =
-
             findNavController(
                 this@MainActivity,
                 R.id.nav_host_fragment_content_main

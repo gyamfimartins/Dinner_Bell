@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -23,7 +24,7 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var viewModel: IngredientViewModel
     private val ingredientAdapter = IngredientAdapter(arrayListOf()){
-        viewMeaning(it)
+        //viewMeaning(it)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,42 +34,33 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
 
         viewModel.refresh()
-        binding.rvingredient.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ingredientAdapter
-        }
 
         observeViewModel()
         return binding.root
     }
 
-    fun viewMeaning(strDescription: String){
-        val snackbar: Snackbar = Snackbar.make(binding.root, strDescription, Snackbar.LENGTH_LONG)
-
-        val snackbarView = snackbar.view
-        val snackTextView = snackbarView.findViewById<View>(R.id.snackbar_text) as TextView
-
-        snackTextView.maxLines = 100
-        snackbar.show()
-    }
-
     fun observeViewModel(){
         viewModel.ingredient.observe(requireActivity(), Observer { ingredientList ->
             ingredientList?.let {
-                binding.rvingredient.visibility = View.VISIBLE
-                ingredientAdapter.updateIngredientList(ingredientList)
+                //binding.rvingredient.visibility = View.VISIBLE
+                //ingredientAdapter.updateIngredientList(ingredientList)
+                val mList = ingredientList.map { it.strIngredient }
+                val ingredientAdapter = ArrayAdapter(
+                    requireContext(), android.R.layout.simple_list_item_1, mList
+                )
+                binding.tvingredients.setAdapter(ingredientAdapter)
             }
 
         })
         viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
             Log.i(ContentValues.TAG, "isLoading $isLoading")
-            binding.loadingView.visibility = if (isLoading) View.VISIBLE else View.GONE
+            //binding.loadingView.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
         viewModel.errorMessage.observe(requireActivity(), Observer { errorMessage ->
             if (errorMessage == null) {
-                binding.listError.visibility = View.GONE
+                //binding.listError.visibility = View.GONE
             } else {
-                binding.listError.visibility = View.VISIBLE
+               // binding.listError.visibility = View.VISIBLE
                 Toast.makeText(requireActivity(), errorMessage, Toast.LENGTH_SHORT).show()
             }
         })

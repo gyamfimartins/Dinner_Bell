@@ -7,55 +7,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.ProfileFragment">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:labelFor="@+id/tvvideoLink"
-        android:text="@string/please_select_your_allegies"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        app:layout_constraintTop_toTopOf="parent"/>
+   <AutoCompleteTextView
+       android:id="@+id/tvingredients"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:drawableEnd="@drawable/ic_outline_arrow_drop_down_24"
+       android:gravity="center"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toStartOf="@id/ivadd"
+       app:layout_constraintTop_toTopOf="@id/ivadd"
+       app:layout_constraintBottom_toBottomOf="@id/ivadd"
+       android:hint="@string/search_ingredient"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvingredient"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <TextView
-        android:id="@+id/listError"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        tools:text="Error"
-        android:textColor="#FA1302"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/loadingView"
+    <ImageView
+        android:id="@+id/ivadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@id/ivadd"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,7 @@ class IngredientAdapter(var ingredientList: ArrayList<Ingredient>, val clickList
     override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
         holder.bind(ingredientList[position])
         holder.itemView.tvingredient.setOnClickListener {
-            clickListener(ingredientList[position].strDescription?:"")
+            //clickListener(ingredientList[position].strDescription?:"")
         }
     }
 

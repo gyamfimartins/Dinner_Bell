@@ -56,11 +56,15 @@
         android:name="com.gyamfimartins.dinnerbell.ui.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
-    <action android:id="@+id/action_global_profileFragment" app:destination="@id/profileFragment" />
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment" />
     <fragment
         android:id="@+id/savedMealFragment"
         android:name="com.gyamfimartins.dinnerbell.ui.SavedMealFragment"
         android:label="Saved Meal"
         tools:layout="@layout/fragment_saved_meal" />
-    <action android:id="@+id/action_global_savedMealFragment" app:destination="@id/savedMealFragment" />
+    <action
+        android:id="@+id/action_global_savedMealFragment"
+        app:destination="@id/savedMealFragment" />
 </navigation>

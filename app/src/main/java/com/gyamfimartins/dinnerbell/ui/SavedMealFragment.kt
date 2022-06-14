@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gyamfimartins.dinnerbell.adapter.SavedMealAdapter
+import com.gyamfimartins.dinnerbell.data.SavedMeal
 import com.gyamfimartins.dinnerbell.databinding.FragmentSavedMealBinding
 import com.gyamfimartins.dinnerbell.viewmodel.SavedMealViewModel
 
@@ -17,10 +18,10 @@ import com.gyamfimartins.dinnerbell.viewmodel.SavedMealViewModel
 class SavedMealFragment : Fragment() {
     private lateinit var binding: FragmentSavedMealBinding
     private lateinit var savedMealViewModel: SavedMealViewModel
-    private val savedMealAdapter = SavedMealAdapter(arrayListOf()){
-        navigateToMealsDetails(it)
-    }
-
+    private val savedMealAdapter = SavedMealAdapter(arrayListOf(),
+        { navigateToMealsDetails(it)},
+        {deleteMeal(it)}
+        )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +45,10 @@ class SavedMealFragment : Fragment() {
     fun navigateToMealsDetails(mealid: String){
         val action = MealListFragmentDirections.actionMealListFragmentToMealDetailsFragment(mealid, "other")
         findNavController().navigate(action)
+    }
+
+    fun deleteMeal(meal: SavedMeal){
+      savedMealViewModel.deleteMeal(meal)
     }
 
 }

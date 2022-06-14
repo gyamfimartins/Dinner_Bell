@@ -15,4 +15,8 @@
     <string name="youtube_link">Youtube Link</string>
     <string name="save">Save</string>
     <string name="please_select_your_allegies">Please select your allegies</string>
+    <string name="saved_meal">Saved Meal</string>
+    <string name="profile">Profile</string>
+    <string name="category">Category</string>
+    <string name="search_ingredient">Search ingredient</string>
 </resources>
