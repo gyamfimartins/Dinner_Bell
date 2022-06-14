@@ -7,23 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.R
-import com.google.android.material.snackbar.Snackbar
-import com.gyamfimartins.dinnerbell.adapter.IngredientAdapter
+import com.gyamfimartins.dinnerbell.adapter.AllergyAdapter
+import com.gyamfimartins.dinnerbell.data.Allergy
+import com.gyamfimartins.dinnerbell.data.SavedMeal
 import com.gyamfimartins.dinnerbell.databinding.FragmentProfileBinding
+import com.gyamfimartins.dinnerbell.viewmodel.AllergyViewModel
 import com.gyamfimartins.dinnerbell.viewmodel.IngredientViewModel
 
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var viewModel: IngredientViewModel
-    private val ingredientAdapter = IngredientAdapter(arrayListOf()){
+    private lateinit var allergyViewModel: AllergyViewModel
+    private val allergyAdapter = AllergyAdapter(arrayListOf()){
         //viewMeaning(it)
     }
     override fun onCreateView(
@@ -32,10 +33,25 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(IngredientViewModel::class.java)
+        allergyViewModel = ViewModelProvider(this).get(AllergyViewModel::class.java)
 
         viewModel.refresh()
+        binding.rvallergy.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = allergyAdapter
+        }
 
+        allergyViewModel.getAllAllergy.observe(viewLifecycleOwner,{ allergyList ->
+            allergyAdapter.updateMealList(allergyList)
+        })
         observeViewModel()
+
+        binding.ivadd.setOnClickListener {
+            val newData = Allergy(0,binding.tvingredients.text.toString())
+            allergyViewModel.addAllergy(newData)
+            Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_LONG).show()
+        }
+
         return binding.root
     }
 
