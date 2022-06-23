@@ -19,4 +19,5 @@
     <string name="profile">Profile</string>
     <string name="category">Category</string>
     <string name="search_ingredient">Search ingredient</string>
+    <string name="this_food_contains_ingredients_you_are_allergic_to">This food contains ingredients you are allergic to.</string>
 </resources>

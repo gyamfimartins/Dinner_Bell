@@ -25,7 +25,7 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: IngredientViewModel
     private lateinit var allergyViewModel: AllergyViewModel
     private val allergyAdapter = AllergyAdapter(arrayListOf()){
-        //viewMeaning(it)
+        deleteAllergy(it)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,6 +81,10 @@ class ProfileFragment : Fragment() {
             }
         })
 
+    }
+
+    fun deleteAllergy(allergy: Allergy){
+        allergyViewModel.deleteAllergy(allergy)
     }
 
 }

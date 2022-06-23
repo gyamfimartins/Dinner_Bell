@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Dao
 interface AllergyDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllergy(allergy: Allergy)
 
     @Delete

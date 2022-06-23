@@ -41,6 +41,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tvallergy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:text="@string/this_food_contains_ingredients_you_are_allergic_to"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:padding="8dp"
+                android:layout_margin="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView
                 android:id="@+id/tvmealname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

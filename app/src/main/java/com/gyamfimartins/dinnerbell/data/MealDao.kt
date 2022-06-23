@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface MealDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE) // <- Annotate the 'addUser' function below. Set the onConflict strategy to IGNORE so if exactly the same user exists, it will just ignore it.
+    @Insert(onConflict = OnConflictStrategy.REPLACE) // <- Annotate the 'addUser' function below. Set the onConflict strategy to IGNORE so if exactly the same user exists, it will just ignore it.
     suspend fun addMeal(savedMeal: SavedMeal)
 
     @Delete
