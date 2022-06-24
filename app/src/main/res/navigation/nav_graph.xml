@@ -17,12 +17,13 @@
     <fragment
         android:id="@+id/mealDetailsFragment"
         android:name="com.gyamfimartins.dinnerbell.ui.MealDetailsFragment"
-        android:label="Random Meal"
-        tools:layout="@layout/fragment_meal_details" >
+        android:label="Meal Details"
+        tools:layout="@layout/fragment_meal_details">
         <argument
             android:name="mealid"
             app:argType="string" />
-        <argument android:name="screen"
+        <argument
+            android:name="screen"
             app:argType="string" />
     </fragment>
     <fragment
