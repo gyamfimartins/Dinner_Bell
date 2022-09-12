@@ -1,11 +1,13 @@
 name: Android CI
 
 on:
-  push:
-    branches:
-      - master
-    tags:
-      - 'v*'
+ workflow_dispatch:
+    inputs:
+      branch:
+        description: ‘Select branch to generate release’
+        required: true
+        default: ‘master’
+  
 
 jobs:
   test:
